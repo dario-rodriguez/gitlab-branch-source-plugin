@@ -15,11 +15,16 @@ import java.util.Collections;
 
 
 public class GitLabProject extends GitlabProject {
+    private static final String INTERNAL_GITLAB_URL = "http://gitlab-core:80/gitlab/";
     public String getRemote(AbstractGitSCMSource source) {
+        String[] url;
         if (source.getCredentialsId() != null && credentials(source, StandardCredentials.class) instanceof SSHUserPrivateKey) {
             return getSshUrl();
         } else {
-            return getHttpUrl();
+            url = getHttpUrl().split("/gitlab/");
+
+            return INTERNAL_GITLAB_URL + url[1];
+            // return getHttpUrl();
         }
     }
 

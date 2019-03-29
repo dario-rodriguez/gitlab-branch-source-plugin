@@ -77,7 +77,8 @@ public final class GitLabSCMWebHookListener {
 
     public URL url() {
         try {
-            return new URL(Jenkins.getInstance().getRootUrl() + NOTIFICATION_ENDPOINT + HOOK_PATH_SEP + id());
+            // return new URL(Jenkins.getInstance().getRootUrl() + NOTIFICATION_ENDPOINT + HOOK_PATH_SEP + id());
+            return new URL("http://jenkins-core:8080/jenkins/" + NOTIFICATION_ENDPOINT + HOOK_PATH_SEP + id());
         } catch (MalformedURLException e) {
             throw new RuntimeException(Messages.GitLabSCMWebHook_hook_url_is_malformed(e.getMessage()));
         }
